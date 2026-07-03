@@ -13,11 +13,7 @@ const NAV_LINKS: NavLink[] = [
   { label: 'Blog', href: '/blog' },
 ];
 
-/**
- * Highlights a link for both its exact page and any of its sub-pages (e.g.
- * `/blog` stays active on `/blog/june`), while `/` only matches the home
- * page itself — otherwise every route would count as "under" it.
- */
+/** Matches a link's own page and its sub-pages; `/` only matches itself. */
 function isActiveLink(href: string, pathname: string): boolean {
   if (href === '/') {
     return pathname === '/';
@@ -27,18 +23,17 @@ function isActiveLink(href: string, pathname: string): boolean {
 }
 
 /**
- * Site-wide nav shell: Acme Co branding + nav links + a mobile menu toggle.
- * This is a progressive-enhancement widget, not the content renderer — it
- * mounts on top of server-rendered pages and never gates their content.
+ * Site-wide nav shell: branding + nav links + mobile menu toggle. A
+ * progressive-enhancement widget, not the content renderer.
  *
- * template.html has an equivalent static version of this markup so the
- * header is visible immediately, before this script even loads — see
- * frontend/src/site-shell-entry.tsx, which mounts this over it.
+ * template.html has a static copy of this markup so the header is visible
+ * before this script loads; site-shell-entry.tsx mounts this over it. Keep
+ * the two in sync.
  */
 export function SiteShell() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Every navigation is a full page load (no client router), so the current
-  // path is read once at mount time — it can't change without a re-mount.
+  // Read once: every navigation is a full page load, so this can't change
+  // without a re-mount.
   const pathname = window.location.pathname;
 
   return (
@@ -47,9 +42,7 @@ export function SiteShell() {
         <a className="site-shell__brand" href="/">
           Acme Co
         </a>
-        {/* Toggle comes before the nav it controls so, once the nav wraps
-            onto its own row via flex-basis on mobile, the toggle still
-            shares row 1 with the brand instead of being pushed down too. */}
+        {/* Comes before <nav> so it stays on row 1 when nav wraps on mobile. */}
         <button
           type="button"
           className="site-shell__toggle"

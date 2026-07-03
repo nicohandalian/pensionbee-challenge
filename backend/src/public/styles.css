@@ -1,8 +1,6 @@
-/* Plain, framework-free stylesheet for the Acme Co static content site.
-   Served by Express as a static asset; see backend/src/app.ts (publicDir)
-   and backend/src/templates/template.html (<link rel="stylesheet">).
-   Fonts (Manrope for UI/headings, Source Serif 4 for body copy) are loaded
-   from Google Fonts in template.html. */
+/* Plain, framework-free stylesheet. Served as a static asset via
+   backend/src/app.ts's publicDir mount. Fonts are loaded from Google
+   Fonts in template.html: Manrope for UI/headings, Source Serif 4 for body. */
 
 :root {
   --font-sans:
@@ -22,21 +20,16 @@
   --content-width: 42rem;
 }
 
-/* Every navigation here is a full page load (no client router), so without
-   this the browser hard-cuts to a blank/white frame between pages. Chromium
-   cross-fades old/new documents instead; unsupported browsers just ignore
-   the at-rule and keep the normal (still same-background, so unobtrusive)
-   hard navigation. Scoped to prefers-reduced-motion so it never activates
-   for users who've asked their OS to minimize motion. */
+/* Every navigation is a full page load; this cross-fades old/new documents
+   in Chromium instead of a hard white flash. Unsupported browsers ignore it. */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
     navigation: auto;
   }
 }
 
-/* Belt-and-suspenders: forces every animation/transition on the page to be
-   effectively instant when reduced motion is requested, so nothing is
-   missed even if a future addition forgets to check for it individually. */
+/* Belt-and-suspenders: forces every animation/transition to be instant when
+   reduced motion is requested, even ones added later that forget to check. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -68,10 +61,7 @@ body {
   margin: 0;
   min-height: 100vh;
   min-height: 100dvh;
-  /* Sticky footer: header + content + footer stack in a column that's at
-     least one viewport tall, and .content (the only flexible piece) grows
-     to fill the gap — so the footer always sits at the bottom at a
-     consistent height, whether the page is short or long. */
+  /* Sticky footer: column layout, .content grows to fill the gap. */
   display: flex;
   flex-direction: column;
   color: var(--color-text);
@@ -171,8 +161,7 @@ pre code {
   padding: 0;
 }
 
-/* Readable content column. flex: 1 makes it the piece that grows to push
-   the footer to the bottom of the viewport (see body's flex layout). */
+/* Readable content column; flex: 1 pushes the footer to the bottom. */
 .content {
   flex: 1;
   max-width: var(--content-width);
@@ -199,13 +188,8 @@ pre code {
   }
 }
 
-/* Site-shell nav.
-   NB: deliberately no backdrop-filter here. A translucent + blurred sticky
-   header is a well-known Chrome flicker trigger (the compositor tears down
-   and rebuilds the blur layer on things like tab visibility changes and
-   scroll) — see https://stackoverflow.com/q/57736567. A solid background
-   avoids the whole bug class instead of chasing GPU-layer hacks for a
-   decorative effect. */
+/* Site-shell nav. No backdrop-filter: it's a known Chrome flicker trigger on
+   sticky headers (compositor rebuilds the blur layer on tab switches). */
 .site-shell {
   position: sticky;
   top: 0;
@@ -304,8 +288,7 @@ pre code {
     display: block;
   }
 
-  /* Hidden by default; forced onto its own full-width row via flex-wrap
-     on .site-shell__bar once opened, so it drops below brand + toggle. */
+  /* Hidden by default; flex-basis: 100% drops it below brand + toggle when open. */
   .site-shell__nav {
     display: none;
     flex-basis: 100%;

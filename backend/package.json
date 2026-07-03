@@ -10,11 +10,16 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "compression": "^1.8.1",
     "express": "^5.2.1",
-    "marked": "^18.0.5"
+    "helmet": "^8.2.0",
+    "marked": "^18.0.5",
+    "morgan": "^1.11.0"
   },
   "devDependencies": {
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.4",
     "@types/supertest": "^6.0.3",
     "supertest": "^7.1.4",

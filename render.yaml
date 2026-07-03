@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: pensionbee-challenge
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start -w backend
+    envVars:
+      - key: NODE_ENV
+        value: production

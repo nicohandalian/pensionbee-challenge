@@ -11,7 +11,7 @@ const contentService = new ContentService({
 const templatePath = path.join(fixturesDir, 'template.html');
 
 describe('content routes', () => {
-  it('renders content/index.md for the root route, wrapped in the template', async () => {
+  it('renders content/index.md for the root route', async () => {
     const app = createApp({ contentService, templatePath });
 
     const response = await request(app).get('/');
@@ -49,7 +49,7 @@ describe('content routes', () => {
     expect(response.text).toContain('<h1>About</h1>');
   });
 
-  it('returns 404 for a path traversal attempt instead of leaking files', async () => {
+  it('returns 404 for a path traversal attempt', async () => {
     const app = createApp({ contentService, templatePath });
 
     const response = await request(app).get('/../../../etc/passwd');
@@ -57,7 +57,7 @@ describe('content routes', () => {
     expect(response.status).toBe(404);
   });
 
-  it('renders a custom content/404/index.md for unknown routes, like any other page', async () => {
+  it('renders content/404/index.md for unknown routes', async () => {
     const app = createApp({ contentService, templatePath });
 
     const response = await request(app).get('/does-not-exist');

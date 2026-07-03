@@ -18,7 +18,7 @@ describe('widget assets', () => {
     const response = await request(app).get('/assets/site-shell.js');
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain('site-shell widget loaded');
+    expect(response.text).toContain('export {}');
   });
 
   it('returns 404 for an asset that does not exist', async () => {

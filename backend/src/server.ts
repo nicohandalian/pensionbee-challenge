@@ -23,6 +23,24 @@ const app = createApp({
 
 const port = Number(process.env.PORT) || 3000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Backend listening on http://localhost:${port}`);
 });
+
+// Hosting platforms send SIGTERM before killing a container on
+// redeploy/scale-down — drain in-flight requests instead of dropping them.
+function shutdown(signal: NodeJS.Signals): void {
+  console.log(`${signal} received, shutting down gracefully`);
+
+  server.close((error) => {
+    if (error) {
+      console.error('Error during shutdown:', error);
+      process.exit(1);
+    }
+
+    process.exit(0);
+  });
+}
+
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

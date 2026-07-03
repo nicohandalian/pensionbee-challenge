@@ -5,7 +5,7 @@ export function App() {
     <>
       <SiteShell />
       <main>
-        <h1>PensionBee Challenge</h1>
+        <h1>Acme CO</h1>
         <p>Frontend bootstrap complete.</p>
       </main>
     </>

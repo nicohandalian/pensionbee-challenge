@@ -4,7 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:widget": "npm run build:widget -- --watch",
+    "build": "tsc -b && npm run build:app && npm run build:widget",
+    "build:app": "vite build",
+    "build:widget": "vite build --config vite.widget.config.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest"

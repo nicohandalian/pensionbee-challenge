@@ -3,9 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PensionBee Challenge</title>
+    <title>Acme CO</title>
   </head>
   <body>
     {{content}}
+    <!-- The site-shell widget injects its own container; see frontend/src/site-shell-entry.tsx.
+         Filename/path come from frontend/vite.widget.config.ts + backend/src/app.ts's /assets mount -->
+    <script type="module" src="/assets/site-shell.js"></script>
   </body>
 </html>

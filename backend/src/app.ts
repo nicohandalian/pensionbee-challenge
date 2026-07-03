@@ -8,6 +8,8 @@ import {
 export type CreateAppOptions = {
   contentService: ContentService;
   templatePath: string;
+  /** Directory of the built site-shell widget assets, served under /assets. */
+  widgetAssetsDir?: string;
 };
 
 const templateCache = new Map<string, string>();
@@ -32,12 +34,21 @@ function renderTemplate(template: string, content: string): string {
 export function createApp({
   contentService,
   templatePath,
+  widgetAssetsDir,
 }: CreateAppOptions): Express {
   const app = express();
 
   app.get('/health', (_req, res) => {
     res.json({ status: 'ok' });
   });
+
+  // Registered before the content catch-all so asset requests are served
+  // directly and never fall through to ContentService's markdown resolver.
+  // If you rename this mount path, also update the <script src> in
+  // backend/src/templates/template.html.
+  if (widgetAssetsDir) {
+    app.use('/assets', express.static(widgetAssetsDir));
+  }
 
   app.get('/{*splat}', async (req, res, next) => {
     try {

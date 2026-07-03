@@ -53,22 +53,19 @@ npm install
 
 ## Development
 
-Run both apps:
-
 ```bash
 npm run dev
 ```
 
-- Frontend: http://localhost:5173
-- Backend: http://localhost:3000
-- Health check: http://localhost:3000/health (also proxied at http://localhost:5173/health)
+This starts the backend (with the site-shell widget rebuilding on change) at **http://localhost:3000** — that's the one and only URL you should browse. There's no separate frontend server to visit: the backend serves the fully rendered pages, and the React widget ships as a static asset that mounts itself client-side. A request to a content route (`/about`, `/blog/...`) returns the final page directly — no redirects, no client-side routing.
 
-Run a single workspace:
+If you want to iterate on the `SiteShell` component in isolation with hot-reload (a nice-to-have for UI tweaks, not part of the main workflow), run:
 
 ```bash
-npm run dev -w backend
-npm run dev -w frontend
+npm run dev:widget-preview
 ```
+
+This opens a throwaway Vite dev harness at http://localhost:5173 that renders the component standalone — it has no routes, no content, and isn't part of the shipped app.
 
 ## Testing
 

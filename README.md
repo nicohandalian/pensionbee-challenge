@@ -86,6 +86,25 @@ npm run format
 npm run format:check
 ```
 
+## CI
+
+GitHub Actions runs on every pull request and on pushes to `main`. Workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+
+Steps:
+
+1. `npm ci`
+2. `npm run lint`
+3. `npm test`
+4. `npm run build`
+
+Run the same checks locally before pushing:
+
+```bash
+npm run ci
+```
+
+Results appear under the **Actions** tab and in pull request checks.
+
 ## Project structure
 
 ```
@@ -99,6 +118,7 @@ npm run format:check
 │       └── __tests__/
 ├── frontend/
 │   └── src/
+├── .github/workflows/     # CI pipeline
 └── package.json           # Workspace root
 ```
 

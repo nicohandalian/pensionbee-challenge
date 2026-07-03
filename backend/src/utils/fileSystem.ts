@@ -39,7 +39,7 @@ export function resolveContentPath(
   const root = path.resolve(contentDir);
   const resolved = path.resolve(root, ...segments, 'index.md');
 
-  if (resolved !== root && !resolved.startsWith(`${root}${path.sep}`)) {
+  if (!resolved.startsWith(`${root}${path.sep}`)) {
     return null;
   }
 

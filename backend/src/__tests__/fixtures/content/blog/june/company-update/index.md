@@ -1,3 +1,1 @@
-# Company update
-
-June update content.
+# Company Update

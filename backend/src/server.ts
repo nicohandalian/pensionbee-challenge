@@ -12,11 +12,13 @@ const templatePath = path.join(
   'template.html',
 );
 const widgetAssetsDir = path.join(repoRoot, 'frontend', 'dist', 'widget');
+const publicDir = path.join(backendRoot, 'src', 'public');
 
 const app = createApp({
   contentService: new ContentService({ contentDir }),
   templatePath,
   widgetAssetsDir,
+  publicDir,
 });
 
 const port = Number(process.env.PORT) || 3000;

@@ -31,6 +31,15 @@ describe('content routes', () => {
     expect(response.text).toContain('<h1>About</h1>');
   });
 
+  it('renders a deeply nested route, e.g. /blog/june/company-update', async () => {
+    const app = createApp({ contentService, templatePath });
+
+    const response = await request(app).get('/blog/june/company-update');
+
+    expect(response.status).toBe(200);
+    expect(response.text).toContain('<h1>Company Update</h1>');
+  });
+
   it('resolves routes with a trailing slash the same as without', async () => {
     const app = createApp({ contentService, templatePath });
 
@@ -40,20 +49,35 @@ describe('content routes', () => {
     expect(response.text).toContain('<h1>About</h1>');
   });
 
-  it('returns 404 for an unknown route', async () => {
-    const app = createApp({ contentService, templatePath });
-
-    const response = await request(app).get('/does-not-exist');
-
-    expect(response.status).toBe(404);
-    expect(response.text).toContain('Not Found');
-  });
-
   it('returns 404 for a path traversal attempt instead of leaking files', async () => {
     const app = createApp({ contentService, templatePath });
 
     const response = await request(app).get('/../../../etc/passwd');
 
     expect(response.status).toBe(404);
+  });
+
+  it('renders a custom content/404/index.md for unknown routes, like any other page', async () => {
+    const app = createApp({ contentService, templatePath });
+
+    const response = await request(app).get('/does-not-exist');
+
+    expect(response.status).toBe(404);
+    expect(response.text).toContain('<h1>Custom Not Found</h1>');
+  });
+
+  it('falls back to a minimal 404 page when content/404/index.md does not exist', async () => {
+    const contentServiceWithoutCustom404 = new ContentService({
+      contentDir: path.join(fixturesDir, 'content-without-404'),
+    });
+    const app = createApp({
+      contentService: contentServiceWithoutCustom404,
+      templatePath,
+    });
+
+    const response = await request(app).get('/does-not-exist');
+
+    expect(response.status).toBe(404);
+    expect(response.text).toContain('<h1>Not Found</h1>');
   });
 });

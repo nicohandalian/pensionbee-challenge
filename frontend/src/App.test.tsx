@@ -7,7 +7,7 @@ describe('App', () => {
     render(<App />);
 
     expect(
-      screen.getByRole('heading', { name: 'Acme CO' }),
+      screen.getByRole('heading', { name: 'SiteShell preview' }),
     ).toBeInTheDocument();
   });
 });

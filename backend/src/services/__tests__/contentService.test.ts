@@ -2,7 +2,16 @@ import path from 'path';
 import { describe, expect, it } from 'vitest';
 import { ContentNotFoundError, ContentService } from '../contentService.js';
 
-const fixturesDir = path.join(import.meta.dirname, 'fixtures', 'content');
+// Shared with the other backend integration tests rather than duplicated —
+// see backend/src/__tests__/fixtures/content.
+const fixturesDir = path.join(
+  import.meta.dirname,
+  '..',
+  '..',
+  '__tests__',
+  'fixtures',
+  'content',
+);
 
 describe('ContentService', () => {
   const service = new ContentService({ contentDir: fixturesDir });

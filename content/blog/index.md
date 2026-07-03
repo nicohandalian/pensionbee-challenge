@@ -1,5 +1,5 @@
 # Blog
 
-Updates and news from Acme Co.
+Updates and news from Acme Co., organized by month.
 
-- [Company Update - June](/blog/june/company-update)
+- [June](/blog/june)

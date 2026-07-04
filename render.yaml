@@ -3,7 +3,7 @@ services:
     name: pensionbee-challenge
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start -w backend
     envVars:
       - key: NODE_ENV

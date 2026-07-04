@@ -222,13 +222,10 @@ pre code {
   text-decoration: none;
 }
 
-.site-shell__brand::before {
-  content: '';
-  display: inline-block;
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 999px;
-  background: var(--color-accent);
+.site-shell__logo {
+  display: block;
+  height: 2.75rem;
+  width: auto;
 }
 
 .site-shell__toggle {

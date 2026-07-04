@@ -40,7 +40,7 @@ export function SiteShell() {
     <header className="site-shell">
       <div className="site-shell__bar">
         <a className="site-shell__brand" href="/">
-          Acme Co
+          <img className="site-shell__logo" src="/logo.png" alt="Acme Co" />
         </a>
         {/* Comes before <nav> so it stays on row 1 when nav wraps on mobile. */}
         <button

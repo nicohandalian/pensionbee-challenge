@@ -7,7 +7,7 @@ describe('App', () => {
     render(<App />);
 
     expect(
-      screen.getByRole('heading', { name: 'PensionBee Challenge' }),
+      screen.getByRole('heading', { name: 'SiteShell preview' }),
     ).toBeInTheDocument();
   });
 });

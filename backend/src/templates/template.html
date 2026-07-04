@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acme Co</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+    />
+    <!-- Served from backend/src/public/styles.css via app.ts's publicDir mount -->
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!-- Static so the header shows on first paint; React mounts over it via
+         frontend/src/site-shell-entry.tsx. Keep in sync with SiteShell.tsx. -->
+    <div id="site-shell-root">
+      <header class="site-shell">
+        <div class="site-shell__bar">
+          <a class="site-shell__brand" href="/">
+            <img class="site-shell__logo" src="/logo.png" alt="Acme Co" />
+          </a>
+          <button
+            type="button"
+            class="site-shell__toggle"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Toggle navigation"
+          >
+            <span aria-hidden="true">☰</span>
+          </button>
+          <nav id="site-nav" class="site-shell__nav" data-open="false">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about-page">About</a></li>
+              <li><a href="/jobs">Jobs</a></li>
+              <li><a href="/valves">Valves</a></li>
+              <li><a href="/blog">Blog</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <main class="content">{{content}}</main>
+    <!-- Same on every page, so plain HTML rather than a React widget. -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Acme Co. All rights reserved.</p>
+    </footer>
+    <!-- Filename/path come from frontend/vite.widget.config.ts + backend/src/app.ts's /assets mount -->
+    <script type="module" src="/assets/site-shell.js"></script>
+  </body>
+</html>

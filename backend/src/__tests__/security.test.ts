@@ -19,6 +19,7 @@ describe('security headers', () => {
     expect(response.headers['x-content-type-options']).toBe('nosniff');
     expect(response.headers['x-frame-options']).toBe('SAMEORIGIN');
     expect(response.headers['content-security-policy']).toBeDefined();
+    expect(response.headers['strict-transport-security']).toBeDefined();
   });
 
   it('sets helmet security headers on 404 responses too', async () => {

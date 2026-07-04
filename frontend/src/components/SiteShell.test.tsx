@@ -47,6 +47,16 @@ describe('SiteShell', () => {
     ).toHaveAttribute('aria-expanded', 'false');
   });
 
+  it('marks Home as active at the root path, not on other pages', () => {
+    window.history.pushState({}, '', '/');
+    render(<SiteShell />);
+
+    expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
+  });
+
   it('marks the current page link as active via aria-current', () => {
     window.history.pushState({}, '', '/jobs');
     render(<SiteShell />);

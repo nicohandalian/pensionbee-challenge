@@ -30,7 +30,7 @@ npm install
 npm run dev
 ```
 
-Starts the backend (rebuilding the widget on change) at **http://localhost:3000** — the only URL you need. For isolated hot-reload on `SiteShell`, use `npm run dev:widget-preview` (a throwaway harness at http://localhost:5173, not part of the shipped app).
+Starts the backend (rebuilding the widget on change) at **http://localhost:3000**. For isolated hot-reload on `SiteShell`, use `npm run dev:widget-preview` (a throwaway harness at http://localhost:5173, not part of the shipped app).
 
 ## Scripts
 
@@ -77,13 +77,9 @@ Security headers ([`helmet`](https://github.com/helmetjs/helmet)), gzip ([`compr
 ## Adding a new page
 
 1. Create a folder under `content/` matching the URL: `content/pricing/` → `/pricing`.
-2. Add an `index.md` file inside it. Delete the folder and the route 404s instead.
+2. Add an `index.md` file inside it.
 
 Listing pages aren't auto-generated (`content/blog/index.md` links to `/blog/june` by hand), and `content/` ships in this repo, so publishing still means a commit + deploy — just with zero application code changes.
-
-## Iterating from here
-
-`ContentService` is the one seam the rest of the app depends on, so this plugs in without touching request-handling or templates: swap the filesystem read for a headless CMS or database call, add an authenticated admin UI once content lives behind an API instead of git, add search over `content/**/index.md`, or move `content/` out of git entirely.
 
 ## Status against the challenge brief
 
